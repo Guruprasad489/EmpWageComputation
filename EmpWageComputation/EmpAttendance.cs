@@ -14,18 +14,19 @@ namespace EmpWageComputation
         {
                 Random random = new Random();
                 int randomInput = random.Next(0,3);
-                if (randomInput == EMP_FULLTIME)
+                switch (randomInput)
                 {
-                    empHrs = 8;
+                    case EMP_FULLTIME:
+                        empHrs = 8;
+                        break;
+                    case EMP_PARTTIME:
+                        empHrs = 4;
+                        break;
+                    default: 
+                        empHrs = 0;
+                        break;
                 }
-                else if (randomInput == EMP_PARTTIME)
-                {
-                    empHrs = 4;
-                }
-                else
-                {
-                    empHrs = 0; 
-                }
+                
                 daily_Emp_Wage = empHrs * EMP_WAGE_PER_HR;
                 Console.WriteLine("Daily Employee Wage is: " + daily_Emp_Wage);
         }
