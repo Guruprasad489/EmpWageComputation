@@ -13,7 +13,7 @@ namespace EmpWageComputation
         public static void GetEmpAttendance()
         {
             Random random = new Random();
-            int randomInput = random.Next(1, 2);
+            int randomInput = random.Next(0,2);
             if (randomInput==EMP_PRESENT)
             {
                 Console.WriteLine("Employee is Present");
