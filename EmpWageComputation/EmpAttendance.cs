@@ -9,19 +9,21 @@ namespace EmpWageComputation
     public class EmpAttendance
     {
         const int EMP_PRESENT = 1;
-
-        public static void GetEmpAttendance()
+        static int daily_Emp_Wage = 0, empWage_Per_Hr = 20, empHrs = 0;
+        public static void GetEmpWage()
         {
-            Random random = new Random();
-            int randomInput = random.Next(1, 2);
-            if (randomInput==EMP_PRESENT)
-            {
-                Console.WriteLine("Employee is Present");
-            }
-            else
-            {
-                Console.WriteLine("Employee is Absent");
-            }
+                Random random = new Random();
+                int randomInput = random.Next(0,2);
+                if (randomInput == EMP_PRESENT)
+                {
+                    empHrs = 8;
+                }
+                else
+                {
+                    empHrs = 0;
+                }
+                daily_Emp_Wage = empHrs * empWage_Per_Hr;
+                Console.WriteLine("Daily Employee Wage is: " + daily_Emp_Wage);
         }
 
     }
