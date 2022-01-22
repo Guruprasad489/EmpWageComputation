@@ -11,7 +11,8 @@ namespace EmpWageComputation
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to Empolyee Wage Computation Program");
-            EmpAttendance.GetDailyEmpWage();
+            //EmpAttendance empattendance = new EmpAttendance();
+            EmpAttendance.GetMonthlyEmpWage();
             Console.ReadLine();
         }
     }
