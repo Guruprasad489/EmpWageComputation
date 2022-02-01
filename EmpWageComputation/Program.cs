@@ -18,6 +18,8 @@ namespace EmpWageComputation
             empWageBuilder.AddCompanyEmpWageToList("Deloitte", 30, 3, 30);
             empWageBuilder.ComputeEmpWage();
 
+            Console.WriteLine("\nTotal Emp Wage for Google: " + empWageBuilder.GetTotalWage("Google"));
+
             Console.ReadLine();
         }
     }

@@ -6,19 +6,21 @@ using System.Threading.Tasks;
 
 namespace EmpWageComputation
 {
-    public class EmpWageBuilderList
+    public class EmpWageBuilderList : IComputeEmpWage
     {
         public const int EMP_FULLTIME=1, EMP_PARTTIME=2;
 
         private List<CompanyEmpWage> companyEmpWageList;
-        private List<CompanyEmpWage> dailyAndTotalWageList;
+        private Dictionary<string, CompanyEmpWage> companyTotalWageMap;
+        //private List<CompanyEmpWage> dailyAndTotalWageList;
 
         public static Random random = new Random();
 
         public EmpWageBuilderList()
         {
             companyEmpWageList = new List<CompanyEmpWage>();
-            dailyAndTotalWageList = new List<CompanyEmpWage>();
+            companyTotalWageMap = new Dictionary<string, CompanyEmpWage>();
+            //dailyAndTotalWageList = new List<CompanyEmpWage>();
         }
 
         //Manage multiple companies using list
@@ -26,6 +28,7 @@ namespace EmpWageComputation
         {
             CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, emp_Wage_Per_Hr, working_Days_Per_Month, max_Hrs_Per_Month);
             companyEmpWageList.Add(companyEmpWage);
+            companyTotalWageMap.Add(company, companyEmpWage);
         }
 
 
@@ -64,14 +67,19 @@ namespace EmpWageComputation
                 total_Emp_Hrs += empHrs;
                 totalWorkingDays++;
 
-                CompanyEmpWage dailyAndTotalWage = new CompanyEmpWage(companyEmpWage.company, daily_Emp_Wage, companyEmpWage.total_Emp_Wage);
-                dailyAndTotalWageList.Add(dailyAndTotalWage);
+                //CompanyEmpWage dailyAndTotalWage = new CompanyEmpWage(companyEmpWage.company, daily_Emp_Wage, companyEmpWage.total_Emp_Wage);
+                //dailyAndTotalWageList.Add(dailyAndTotalWage);
 
             }
             Console.WriteLine("Total Days: {0}, Total working hours: {1}", (totalWorkingDays-1), total_Emp_Hrs);
             Console.WriteLine("Total Employee Wage for company " + companyEmpWage.company + " is: " + companyEmpWage.total_Emp_Wage + "\n");
             return companyEmpWage.total_Emp_Wage;
-        }   
+        }  
+
+        public int GetTotalWage(String company)
+        {
+            return this.companyTotalWageMap[company].total_Emp_Wage;
+        }
 
     }
 }
