@@ -6,31 +6,32 @@ using System.Threading.Tasks;
 
 namespace EmpWageComputation
 {
-    public class EmpWageBuilderArray
+    public class EmpWageBuilderList
     {
         public const int EMP_FULLTIME=1, EMP_PARTTIME=2;
-        private int noOfCompany = 0;
 
-        private CompanyEmpWage[] companyEmpWageArray;
+        private List<CompanyEmpWage> companyEmpWageList;
+
         public static Random random = new Random();
 
-        public EmpWageBuilderArray()
+        public EmpWageBuilderList()
         {
-            this.companyEmpWageArray = new CompanyEmpWage[5];
+            companyEmpWageList = new List<CompanyEmpWage>();
         }
 
-        public void AddCompanyEmpWage(string company, int emp_Wage_Per_Hr, int working_Days_Per_Month, int max_Hrs_Per_Month)
+        //Manage multiple companies using list
+        public void AddCompanyEmpWageToList(string company, int emp_Wage_Per_Hr, int working_Days_Per_Month, int max_Hrs_Per_Month)
         {
-            companyEmpWageArray[this.noOfCompany] = new CompanyEmpWage(company, emp_Wage_Per_Hr, working_Days_Per_Month, max_Hrs_Per_Month);
-            noOfCompany++;
+            CompanyEmpWage companyEmpWage = new CompanyEmpWage(company, emp_Wage_Per_Hr, working_Days_Per_Month, max_Hrs_Per_Month);
+            companyEmpWageList.Add(companyEmpWage);
         }
 
         public void ComputeEmpWage()
         {
-            for (int i = 0; i < noOfCompany; i++)
+            foreach (CompanyEmpWage empWage in companyEmpWageList)
             {
-                companyEmpWageArray[i].SetTotalEmpWage(this.ComputeEmpWage(this.companyEmpWageArray[i]));
-                Console.WriteLine(companyEmpWageArray[i].ToString());
+                empWage.SetTotalEmpWage(ComputeEmpWage(empWage));
+                Console.WriteLine(empWage.ToString());
             }
         }
 
@@ -63,7 +64,7 @@ namespace EmpWageComputation
                 
             }
             Console.WriteLine("Total Days: {0}, Total working hours: {1}", (totalWorkingDays-1), total_Emp_Hrs);
-            //Console.WriteLine("Total Employee Wage for company " + company + " is: " + total_Emp_Wage + "\n");
+            Console.WriteLine("Total Employee Wage for company " + companyEmpWage.company + " is: " + companyEmpWage.total_Emp_Wage + "\n");
             return companyEmpWage.total_Emp_Wage;
         }   
         
